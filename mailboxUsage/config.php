@@ -1,9 +1,12 @@
 <?php
 /**
  * Kerio APIs Client Library for PHP - Config Example.
+ * @copyright Copyright &copy; 2012-2012 Kerio Technologies s.r.o.
  *
- * @copyright	Copyright &copy; 2012-2012 Kerio Technologies s.r.o.
- * @version		1.3.0.62
+ * Changed by: Mark Schouten <mark@tuxis.nl>
+ * March 2013, Ede, NL
+ * © Mark Schouten
+ * Released as GPL
  */
 /* Application details */
 $name = 'Kerioindecloud.nl usage monitor';
