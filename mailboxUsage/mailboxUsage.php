@@ -2,11 +2,14 @@
 <?php
 /**
  * Administration API for Kerio Connect - Sample Application.
- *
- * Get top 10 mailbox usage in each domain.
- *
  * @copyright	Copyright &copy; 2012-2012 Kerio Technologies s.r.o.
- * @version		1.3.0.62
+ * 
+ * Changed by: Mark Schouten <mark@tuxis.nl>
+ * March 2013, Ede, NL
+ * © Mark Schouten
+ * Released as GPL
+ */
+
  */
 require_once(dirname(__FILE__) . '/config.php');
 require_once(dirname(__FILE__) . '/api/MyApi.php');
