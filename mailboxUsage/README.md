@@ -11,18 +11,19 @@ How to use
 The script is quite easy to use:
 * Download all the files and place them locally
 * Make sure you can connect to your Kerio Connect Adminconsole from this host
-* Run the script
 
-    # ./mailboxUsage.php 
+Run the script
+
+    $ ./mailboxUsage.php 
     Hostname: kerio.tuxis.nl
     Username: admin
     Password: ********
      - Domain tuxis.nl
-        * XYZ1@tuxis.nl (User 1) consumes 1154 MegaBytes.
-        * XYZ2@tuxis.nl (User 2) consumes 1008924 Bytes.
-        * XYZ3@tuxis.nl (User 3) consumes 5682 Bytes.
+       * XYZ1@tuxis.nl (User 1) consumes 1154 MegaBytes.
+       * XYZ2@tuxis.nl (User 2) consumes 1008924 Bytes.
+       * XYZ3@tuxis.nl (User 3) consumes 5682 Bytes.
      - Domain tuxis.net
-        ! No users in this domain.
+       ! No users in this domain.
 
 Hostname, Username and Password will be asked for if you run the script.
 Optionally, you can configure the hostname and username in config.php
