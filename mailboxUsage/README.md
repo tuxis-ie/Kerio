@@ -9,9 +9,9 @@ How to use
 ==========
 
 The script is quite easy to use:
-# Download all the files and place them locally
-# Make sure you can connect to your Kerio Connect Adminconsole from this host
-# Run the script
+* Download all the files and place them locally
+* Make sure you can connect to your Kerio Connect Adminconsole from this host
+* Run the script
 
     # ./mailboxUsage.php 
     Hostname: kerio.tuxis.nl
