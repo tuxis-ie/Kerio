@@ -5,7 +5,7 @@ import requests
 import simplejson as json
 
 class KerioApi():
-    def __init__(self, hostname = '', username = '', password = '', webmail = False, nossl = False):
+    def __init__(self, hostname = '', username = '', password = '', webmail = False, nossl = False, verifyssl = True):
         self.hostname = hostname
         self.username = username
         self.password = password
@@ -14,6 +14,7 @@ class KerioApi():
         self.port(4040)
 
         self.dowebmail = webmail
+        self.verifyssl = verifyssl
 
         if webmail == True:
             self.webmail(nossl)
@@ -84,7 +85,7 @@ class KerioApi():
         if self.dowebmail == True:
             uri = uri+'attachment-upload/'
 
-        r = requests.post(uri, data=imagedata, headers=headers)
+        r = requests.post(uri, data=imagedata, headers=headers, verify=self.sslverify)
         return self.handlerequest(r)
         
     def request(self, method, sendparams = {}):
@@ -100,7 +101,7 @@ class KerioApi():
             params['params']['application']['version'] = '1.0'
             params['params']['userName'] = self.username
             params['params']['password'] = self.password
-            r = requests.post(self.uri, data=json.dumps(params), headers=headers)
+            r = requests.post(self.uri, data=json.dumps(params), headers=headers, verify=self.sslverify)
             result = json.loads(r.text)
             if result.has_key('error'):
                 self.error(result['error'])
@@ -120,7 +121,7 @@ class KerioApi():
         if len(params['params']) == 0:
             del params['params']
 
-        r = requests.post(self.uri, data=json.dumps(params), headers=headers)
+        r = requests.post(self.uri, data=json.dumps(params), headers=headers, verify=self.sslverify)
         return self.handlerequest(r)
 
     def handlerequest(self, r):
