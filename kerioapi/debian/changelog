@@ -1,0 +1,5 @@
+python-kerio-api (1.0) stable; urgency=low
+
+  - Initial package release
+
+ -- Mark Schouten <mark@tuxis.nl>  Wed, 27 Aug 2014 11:27:25 +0200

@@ -1,0 +1,12 @@
+Source: python-kerio-api
+Section: misc
+Priority: extra
+Maintainer: Mark Schouten <mark@tuxis.nl>
+Build-Depends: debhelper (>= 5), python
+Standards-Version: 3.9.1
+
+Package: python-kerio-api
+Architecture: all
+Depends: python-simplejson, python-requests
+Description: Install the Kerio API Library for Python
+ Install the Kerio API Library for Python
