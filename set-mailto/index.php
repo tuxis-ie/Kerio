@@ -14,7 +14,7 @@ info at tuxis.nl
 <link rel="stylesheet" href="css/style-min.css" type="text/css" />
   <script type="text/javascript">
     navigator.registerProtocolHandler("mailto",
-        "https://<?php echo $_SERVER['SERVER_NAME']; ?>/webmail/index2.html#window/mail/compose/compose:%s",
+        "https://<?php echo $_SERVER['HTTP_HOST']; ?>/webmail/index2.html#window/mail/compose/compose:%s",
         "Kerio Connect");
   </script>
 </head>
