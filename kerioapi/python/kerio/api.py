@@ -5,30 +5,16 @@ import requests
 import simplejson as json
 
 class KerioApi():
-    def __init__(self, hostname = '', username = '', password = '', webmail = False, nossl = False, verifyssl = True):
+    def __init__(self, hostname = None, username = None, password = None, nossl = False, verifyssl = True):
         self.hostname = hostname
         self.username = username
         self.password = password
-
-        self.url      = '/admin/api/jsonrpc/'
-        self.port(4040)
-
-        self.dowebmail = webmail
         self.verifyssl = verifyssl
-
-        if webmail == True:
-            self.webmail(nossl)
 
         self.requestid = 0
         self.token     = ''
         self.cookie    = ''
         self.wclient   = ''
-
-    def webmail(self, nossl = False):
-        self.url      = '/webmail/api/jsonrpc/'
-        self.port(443)
-        if nossl == True:
-            self.port(80)
 
     def port(self, setport):
         if setport == 80:
@@ -98,7 +84,7 @@ class KerioApi():
             params['params']['application'] = {}
             params['params']['application']['name'] = 'PythonApi'
             params['params']['application']['vendor'] = 'Tuxis'
-            params['params']['application']['version'] = '1.0'
+            params['params']['application']['version'] = '1.1'
             params['params']['userName'] = self.username
             params['params']['password'] = self.password
             r = requests.post(self.uri, data=json.dumps(params), headers=headers, verify=self.verifyssl)
@@ -141,3 +127,36 @@ class KerioApi():
         
         print str(message)
         sys.exit(1)
+
+class KerioConnectApi(KerioApi):
+    def __init__(self, hostname = None, username = None, password = None, client = False, nossl = False, verifyssl = True):
+        KerioApi.__init__(self, hostname = hostname, username = username, password = password, nossl = nossl, verifyssl = verifyssl)
+
+        self.url  = '/admin/api/jsonrpc/'
+        self.port(4040)
+
+        if client:
+            self.url = '/webmail/api/jsonrpc/'
+            self.port(443)
+            if nossl:
+                self.port(80)
+
+class KerioOperatorApi(KerioApi):
+    def __init__(self, hostname = None, username = None, password = None, client = False, nossl = False, verifyssl = True):
+        KerioApi.__init__(self, hostname = hostname, username = username, password = password, nossl = nossl, verifyssl = verifyssl)
+
+        self.url  = '/admin/api/jsonrpc/'
+        self.port(4021)
+
+        if client:
+            self.url = '/myphone/api/jsonrpc/'
+            self.port(443)
+            if nossl:
+                self.port(80)
+
+class KerioControlApi(KerioApi):
+    def __init__(self, hostname = None, username = None, password = None, nossl = False, verifyssl = True):
+        KerioApi.__init__(self, hostname = hostname, username = username, password = password, nossl = nossl, verifyssl = verifyssl)
+
+        self.url  = '/admin/api/jsonrpc/'
+        self.port(4081)
