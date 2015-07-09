@@ -1,3 +1,10 @@
+python-kerio-api (1.1) stable; urgency=low
+
+  - Dont exit upon errors, the user should catch the Exception
+  - Add subclasses for products of Kerio. Remove Connect-specific stuff from KerioApi
+
+ -- Mark Schouten <mark@tuxis.nl>  Thu, 09 Jul 2015 04:49:25 +0200
+
 python-kerio-api (1.0) stable; urgency=low
 
   - Initial package release
