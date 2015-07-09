@@ -98,7 +98,7 @@ class KerioApi():
             self.requestid = self.requestid + 1
 
         if self.token == '':
-            error("We should have logged in by now...");
+            self.error('Looks like logging in failed')
 
         params  = self.rparams()
         headers = self.rheaders()
@@ -123,10 +123,9 @@ class KerioApi():
 
     def error(self, message, method = ''):
         if method != '':
-            print "While running "+method+": ",
+            m = "While running %s" % method
         
-        print str(message)
-        sys.exit(1)
+        raise SystemError("%s %s" % (m, message)
 
 class KerioConnectApi(KerioApi):
     def __init__(self, hostname = None, username = None, password = None, client = False, nossl = False, verifyssl = True):
