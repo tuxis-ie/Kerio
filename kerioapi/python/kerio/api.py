@@ -6,7 +6,7 @@ import simplejson as json
 
 class KerioApi():
     def __init__(self, hostname = None, username = None, password = None, nossl = False, verifyssl = True):
-        if type(self) == SuperClass:
+        if type(self) == KerioApi:
             raise Exception("<KerioApi> must be subclassed by Kerio(Connect|Operator|Control)Api.")
 
         self.hostname = hostname
