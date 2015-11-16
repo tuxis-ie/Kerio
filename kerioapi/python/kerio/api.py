@@ -125,6 +125,8 @@ class KerioApi():
      
 
     def error(self, message, method = ''):
+        m = 'No specific method: '
+
         if method != '':
             m = "While running %s" % method
         
