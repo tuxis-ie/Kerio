@@ -2,6 +2,7 @@
 
 import sys
 import requests
+import magic
 import simplejson as json
 
 class KerioApi():
@@ -17,7 +18,7 @@ class KerioApi():
         self.requestid = 0
         self.token     = ''
         self.cookie    = ''
-        self.wclient   = ''
+        self.client    = ''
 
     def port(self, setport):
         if setport == 80:
@@ -62,19 +63,36 @@ class KerioApi():
     def setrequestid(self):
         self.requestid = self.requestid + 1
 
-    def uploadfile(self, imagedata, filename):
+    def uploadfile(self, filename):
         self.construct_uri()
         headers = self.rheaders()
         params  = self.rparams()
-        headers['Content-Description'] = str(filename).split('/')[-1]
-        headers['Content-Length']      = len(imagedata)
-        headers['Content-Type']        = 'image/jpeg'
-        
         uri = self.uri
-        if self.dowebmail == True:
-            uri = uri+'attachment-upload/'
 
-        r = requests.post(uri, data=imagedata, headers=headers, verify=self.verifyssl)
+        realname = str(filename).split('/')[-1]
+
+        if not self.client:
+            del headers['Content-Type']
+            files = {'file': (realname, open(filename, 'rb')) }
+
+            r = requests.post(uri, files=files, headers=headers, verify=self.verifyssl)
+        else:
+            headers['Content-Description'] = realname
+            mime = magic.open(magic.MAGIC_MIME)
+            mime.load()
+
+            try:
+                m = mime.file(filename)
+            except:
+                m = "application/octet-stream"
+
+            f = open(filename, 'rb')
+            d = f.read()
+            headers['Content-Length']      = len(d)
+            headers['Content-Type']        = m
+
+            r = requests.post(uri, data=d, headers=headers, verify=self.verifyssl)
+
         return self.handlerequest(r)
         
     def request(self, method, sendparams = {}):
@@ -140,8 +158,12 @@ class KerioConnectApi(KerioApi):
         self.url  = '/admin/api/jsonrpc/'
         self.port(4040)
 
+        self.uploadurl = '/admin/api/jsonrpc/upload/'
+
         if client:
+            self.client = True
             self.url = '/webmail/api/jsonrpc/'
+            self.uploadurl = '/webmail/api/jsonrpc/attachment-upload/'
             self.port(443)
             if nossl:
                 self.port(80)
