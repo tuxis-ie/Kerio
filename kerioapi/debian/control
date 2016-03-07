@@ -8,6 +8,6 @@ Standards-Version: 3.9.1
 Package: python-kerio-api
 Architecture: all
 Pre-Depends: python-support
-Depends: python-simplejson, python-requests
+Depends: python-simplejson, python-requests, python-magic
 Description: Install the Kerio API Library for Python
  Install the Kerio API Library for Python
